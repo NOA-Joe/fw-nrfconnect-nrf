@@ -11,5 +11,12 @@ include($ENV{ZEPHYR_BASE}/cmake/app/boilerplate.cmake NO_POLICY_SCOPE)
 project(mqtt-simple)
 
 # NORDIC SDK APP START
-target_sources(app PRIVATE src/main.c)
+target_sources(app PRIVATE
+src/https.c
+src/main.c
+src/uarts.c
+src/nvs_flash.c
+src/gpio.c
+)
+
 # NORDIC SDK APP END

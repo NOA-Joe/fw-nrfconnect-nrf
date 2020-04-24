@@ -15,6 +15,11 @@
 #if defined(CONFIG_LWM2M_CARRIER)
 #include <lwm2m_carrier.h>
 #endif
+#include "https.h"
+#include "uarts.h"
+#include "nvs_flash.h"
+#include "gpio.h"
+
 
 /* Buffers for MQTT client. */
 static u8_t rx_buffer[CONFIG_MQTT_MESSAGE_BUFFER_SIZE];
@@ -381,13 +386,12 @@ static void modem_configure(void)
 #endif /* defined(CONFIG_LTE_LINK_CONTROL) */
 }
 
-void main(void)
+void mqtt_main(void)
 {
-	int err;
-
+        int err;
 	printk("The MQTT simple sample started\n");
 
-	modem_configure();
+	//modem_configure();
 
 	client_init(&client);
 
@@ -441,4 +445,27 @@ void main(void)
 	if (err) {
 		printk("Could not disconnect MQTT client. Error: %d\n", err);
 	}
+
+
+
+
+}
+
+void main(void)
+{
+
+        printk( "hello World£¡ %s\n", CONFIG_BOARD);
+        modem_configure();
+       // nvs_main(); 
+        uart_main();
+        button_main();
+        
+
+        https_main();
+        //mqtt_main();
+        while(1)
+        {
+          k_cpu_idle();
+        }
+
 }
